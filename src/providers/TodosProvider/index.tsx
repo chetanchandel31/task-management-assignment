@@ -14,10 +14,12 @@ export default function TodosProvider({ children }: Props) {
     // to store "positions" of todos
     completedTodos: {
       columnTitle: "DONE",
+      columnId: "completedTodos",
       todoIds: [],
     },
     incompleteTodos: {
       columnTitle: "TO DO",
+      columnId: "incompleteTodos",
       todoIds: [],
     },
   });

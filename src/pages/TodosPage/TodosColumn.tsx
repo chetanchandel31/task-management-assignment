@@ -11,7 +11,7 @@ export default function TodosColumn({ column }: Props) {
     <div className="basis-72">
       {column.columnTitle}
 
-      <Droppable droppableId={column.columnTitle}>
+      <Droppable droppableId={column.columnId}>
         {(droppableProvided) => (
           <div
             ref={droppableProvided.innerRef}

@@ -19,10 +19,12 @@ export const TodosContext = createContext<TypeTodosContext>({
     completedTodos: {
       columnTitle: "DONE",
       todoIds: [],
+      columnId: "completedTodos",
     },
     incompleteTodos: {
       columnTitle: "TO DO",
       todoIds: [],
+      columnId: "incompleteTodos",
     },
   },
   setColumns: logWarning,
