@@ -3,6 +3,8 @@ import { useTodos } from "../../providers/TodosProvider/useTodos";
 import TodosColumn from "./TodosColumn";
 import getDragEndUpdatedColumns from "./helpers/getDragEndUpdatedColumns";
 import AddTodo from "./AddTodo";
+import { editTodo } from "../../API";
+import { COMPLETED_TODOS_ID, TypeColumnId } from "../../types";
 
 type Props = {};
 
@@ -11,8 +13,9 @@ export default function TodosPage({}: Props) {
 
   return (
     <DragDropContext
-      onDragEnd={(dropResult) => {
+      onDragEnd={async (dropResult) => {
         if (dropResult.destination) {
+          // update local state
           const updatedColumns = getDragEndUpdatedColumns({
             source: dropResult.source,
             destination: dropResult.destination,
@@ -20,6 +23,19 @@ export default function TodosPage({}: Props) {
           });
 
           setColumns(updatedColumns);
+
+          // network req
+          if (
+            dropResult.source.droppableId !== dropResult.destination.droppableId
+          ) {
+            const columnId = dropResult.source.droppableId as TypeColumnId;
+            const todoId = columns[columnId].todoIds[dropResult.source.index];
+
+            const isChecked =
+              dropResult.source.droppableId !== COMPLETED_TODOS_ID;
+
+            await editTodo(todoId, isChecked);
+          }
         }
       }}
     >

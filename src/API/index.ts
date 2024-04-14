@@ -38,3 +38,22 @@ export async function deleteTodo(todoId: string) {
 
   return json;
 }
+
+export async function editTodo(todoId: string, completed: boolean) {
+  if (Number(todoId) > 100) {
+    // dummy API doesn't create actual TODOs on server, i generate mock data to make it work
+    // trying edit on those TODOs will fail req
+    todoId = `100`;
+  }
+
+  const res = await fetch(`${BASE_URL}/${todoId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      completed,
+    }),
+  });
+  const json = await res.json();
+
+  return json;
+}
