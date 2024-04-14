@@ -17,7 +17,7 @@ export default function AddTodo({}: Props) {
     e.preventDefault();
     const newTodoItem: TypeTodo = {
       completed: false,
-      id: `${Date.now() + Math.random() * 100}`,
+      id: `${Date.now() + Math.round(Math.random() * 100)}`,
       todo: newTodo,
       userId: 1,
     };

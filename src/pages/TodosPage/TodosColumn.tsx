@@ -9,7 +9,9 @@ type Props = {
 export default function TodosColumn({ column }: Props) {
   return (
     <div className="basis-72">
-      {column.columnTitle}
+      <div className="text-muted-foreground mb-8 text-xs font-medium">
+        {column.columnTitle}
+      </div>
 
       <Droppable droppableId={column.columnId}>
         {(droppableProvided) => (

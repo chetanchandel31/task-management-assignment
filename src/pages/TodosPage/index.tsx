@@ -23,10 +23,10 @@ export default function TodosPage({}: Props) {
         }
       }}
     >
-      <div className="p-10">
+      <div className="p-10 bg-slate-100 min-h-dvh">
         <AddTodo />
 
-        <div className="flex gap-10">
+        <div className="flex gap-10 mt-8">
           <TodosColumn column={columns.incompleteTodos} />
 
           <TodosColumn column={columns.completedTodos} />
