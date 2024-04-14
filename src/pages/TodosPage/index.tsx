@@ -2,6 +2,7 @@ import { DragDropContext } from "@hello-pangea/dnd";
 import { useTodos } from "../../providers/TodosProvider/useTodos";
 import TodosColumn from "./TodosColumn";
 import getDragEndUpdatedColumns from "./helpers/getDragEndUpdatedColumns";
+import AddTodo from "./AddTodo";
 
 type Props = {};
 
@@ -22,10 +23,14 @@ export default function TodosPage({}: Props) {
         }
       }}
     >
-      <div className="flex gap-10">
-        <TodosColumn column={columns.incompleteTodos} />
+      <div className="p-10">
+        <AddTodo />
 
-        <TodosColumn column={columns.completedTodos} />
+        <div className="flex gap-10">
+          <TodosColumn column={columns.incompleteTodos} />
+
+          <TodosColumn column={columns.completedTodos} />
+        </div>
       </div>
     </DragDropContext>
   );

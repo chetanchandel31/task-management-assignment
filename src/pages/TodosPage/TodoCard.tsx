@@ -1,5 +1,6 @@
 import { Draggable } from "@hello-pangea/dnd";
 import { useTodos } from "../../providers/TodosProvider/useTodos";
+import { cn } from "../../ui/utils/cn";
 
 type Props = {
   todoId: string;
@@ -20,10 +21,9 @@ export default function TodoCard({ index, todoId }: Props) {
           ref={provided.innerRef}
         >
           <div
-            style={{
-              opacity: snapshot.isDragging ? 0.9 : 1,
-              transform: snapshot.isDragging ? "rotate(-2deg)" : "",
-            }}
+            className={cn({
+              "opacity-50 rotate-2": snapshot.isDragging,
+            })}
           >
             {todosMap[todoId].todo}
           </div>

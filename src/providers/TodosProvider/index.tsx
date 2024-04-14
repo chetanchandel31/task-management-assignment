@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { TypeColumns, TypeTodosMap } from "../../types";
 import { TodosContext } from "./useTodos";
-import fetchTodos from "./helpers/fetchTodos";
+import { fetchTodos } from "../../API";
 
 type Props = { children: React.ReactNode };
 
@@ -25,9 +25,9 @@ export default function TodosProvider({ children }: Props) {
   });
 
   const lastFetchInitiatedAtMsRef = useRef<null | number>(null);
-  const lastFetchInitiatedAtMs = lastFetchInitiatedAtMsRef.current ?? 0;
 
   const initializeTodos = async () => {
+    const lastFetchInitiatedAtMs = lastFetchInitiatedAtMsRef.current ?? 0;
     // de-duping
     if (Date.now() - lastFetchInitiatedAtMs < dedupeIntervalMs) {
       return;
