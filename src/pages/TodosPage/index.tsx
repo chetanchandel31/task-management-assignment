@@ -1,16 +1,25 @@
 import { DragDropContext } from "@hello-pangea/dnd";
 import { useTodos } from "../../providers/TodosProvider/useTodos";
 import TodosColumn from "./TodosColumn";
+import getDragEndUpdatedColumns from "./helpers/getDragEndUpdatedColumns";
 
 type Props = {};
 
 export default function TodosPage({}: Props) {
-  const { columns } = useTodos();
+  const { columns, setColumns } = useTodos();
 
   return (
     <DragDropContext
       onDragEnd={(dropResult) => {
-        console.log("drop result", dropResult);
+        if (dropResult.destination) {
+          const updatedColumns = getDragEndUpdatedColumns({
+            source: dropResult.source,
+            destination: dropResult.destination,
+            columns,
+          });
+
+          setColumns(updatedColumns);
+        }
       }}
     >
       <div className="flex gap-10">
