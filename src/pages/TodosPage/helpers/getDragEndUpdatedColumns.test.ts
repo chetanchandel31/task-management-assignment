@@ -33,9 +33,9 @@ describe("getDragEndUpdatedColumns", () => {
     expect(updatedColumns).toEqual(columns);
   });
 
-  it("should swap items within the same column", () => {
-    const source = { droppableId: INCOMPLETE_TODOS_ID, index: 1 };
-    const destination = { droppableId: INCOMPLETE_TODOS_ID, index: 2 };
+  it("should move item within the same column", () => {
+    const source = { droppableId: INCOMPLETE_TODOS_ID, index: 2 };
+    const destination = { droppableId: INCOMPLETE_TODOS_ID, index: 0 };
     const updatedColumns = getDragEndUpdatedColumns({
       source,
       destination,
@@ -43,8 +43,8 @@ describe("getDragEndUpdatedColumns", () => {
     });
 
     expect(updatedColumns[INCOMPLETE_TODOS_ID].todoIds).toEqual([
-      "todo1",
       "todo3",
+      "todo1",
       "todo2",
     ]);
     expect(updatedColumns[COMPLETED_TODOS_ID].todoIds).toEqual([

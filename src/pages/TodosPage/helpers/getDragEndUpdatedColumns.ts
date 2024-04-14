@@ -22,11 +22,17 @@ export default function getDragEndUpdatedColumns({
     const updatedColumns = structuredClone(columns);
     const droppableId = source.droppableId as TypeColumnId;
 
-    // swap
-    const sourceTodoId = updatedColumns[droppableId].todoIds[source.index];
-    updatedColumns[droppableId].todoIds[source.index] =
-      updatedColumns[droppableId].todoIds[destination.index];
-    updatedColumns[droppableId].todoIds[destination.index] = sourceTodoId;
+    // remove from source
+    const removedItems = updatedColumns[droppableId].todoIds.splice(
+      source.index,
+      1
+    );
+    // insert at destination
+    updatedColumns[droppableId].todoIds.splice(
+      destination.index,
+      0,
+      removedItems[0]
+    );
 
     return updatedColumns;
   }
