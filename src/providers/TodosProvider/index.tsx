@@ -5,7 +5,7 @@ import fetchTodos from "./helpers/fetchTodos";
 
 type Props = { children: React.ReactNode };
 
-// TODO: use axios or react query?
+// TODO: use react query?
 const dedupeIntervalMs = 500;
 
 export default function TodosProvider({ children }: Props) {
@@ -33,16 +33,31 @@ export default function TodosProvider({ children }: Props) {
 
     lastFetchInitiatedAtMsRef.current = Date.now();
 
-    // fetch and set todos
+    // fetch and set todos, columns
     try {
       const fetchedTodos = await fetchTodos();
 
       const _todosMap: TypeTodosMap = {};
+      const completedTodoIds: string[] = [];
+      const incompleteTodoIds: string[] = [];
       fetchedTodos.todos.forEach((todo) => {
         _todosMap[todo.id] = todo;
+
+        if (todo.completed) {
+          completedTodoIds.push(todo.id);
+        } else {
+          incompleteTodoIds.push(todo.id);
+        }
       });
 
       setTodosMap(_todosMap);
+      setColumns((prev) => ({
+        completedTodos: { ...prev.completedTodos, todoIds: completedTodoIds },
+        incompleteTodos: {
+          ...prev.incompleteTodos,
+          todoIds: incompleteTodoIds,
+        },
+      }));
     } catch (error) {
       console.log(error, "wyu38974389");
     }

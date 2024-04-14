@@ -7,15 +7,14 @@ export type TypeTodo = {
 
 export type TypeTodosMap = Record<string, TypeTodo>;
 
+export type TypeColumn = {
+  columnTitle: "DONE" | "TO DO";
+  todoIds: string[];
+};
+
 export type TypeColumns = {
-  completedTodos: {
-    columnTitle: string;
-    todoIds: string[];
-  };
-  incompleteTodos: {
-    columnTitle: string;
-    todoIds: string[];
-  };
+  completedTodos: TypeColumn;
+  incompleteTodos: TypeColumn;
 };
 
 export type TypeSetState<T> = React.Dispatch<React.SetStateAction<T>>;

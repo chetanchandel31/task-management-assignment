@@ -1,47 +1,23 @@
-import { useState } from "react";
+import { DragDropContext } from "@hello-pangea/dnd";
+import { useTodos } from "../../providers/TodosProvider/useTodos";
+import TodosColumn from "./TodosColumn";
 
 type Props = {};
 
-type TypeColumns = {
-  completeTodoIds: string[];
-  inCompleteTodoIds: string[];
-};
-
 export default function TodosPage({}: Props) {
-  const [columns, setColumns] = useState<TypeColumns>({
-    completeTodoIds: ["abc"],
-    inCompleteTodoIds: ["def", "xyz"],
-  });
+  const { columns } = useTodos();
 
   return (
-    <>
-      <div className="bg-red-600">test</div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <DragDropContext
+      onDragEnd={(dropResult) => {
+        console.log("drop result", dropResult);
+      }}
+    >
+      <div className="flex gap-10">
+        <TodosColumn column={columns.incompleteTodos} />
 
-      <div
-        style={{
-          display: "flex",
-          gap: 118,
-        }}
-      >
-        <div className="min-w-40">
-          hi
-          {columns.completeTodoIds.map((todo) => (
-            <div className="border-2" key={todo}>
-              {todo}
-            </div>
-          ))}
-        </div>
-
-        <div className="min-w-40">
-          hi2
-          {columns.inCompleteTodoIds.map((todo) => (
-            <div className="border-2" key={todo}>
-              {todo}
-            </div>
-          ))}
-        </div>
+        <TodosColumn column={columns.completedTodos} />
       </div>
-    </>
+    </DragDropContext>
   );
 }
