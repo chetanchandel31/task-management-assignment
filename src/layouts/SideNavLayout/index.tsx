@@ -13,7 +13,7 @@ type Props = { children: React.ReactNode };
 function SideNavLayout({ children }: Props) {
   return (
     <div className="flex">
-      <div className="w-64 px-4 pt-8 pb-4 flex flex-col">
+      <div className="w-64 h-screen px-4 pt-8 pb-4 flex flex-col">
         <SelectCompany />
 
         <div className="flex-1 pt-10 flex flex-col gap-2">
@@ -56,7 +56,7 @@ function SideNavLayout({ children }: Props) {
         />
       </div>
 
-      <div className="flex-1">{children}</div>
+      <div className="flex-1 h-screen overflow-x-auto">{children}</div>
     </div>
   );
 }

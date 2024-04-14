@@ -16,6 +16,7 @@ export default function TodosColumn({ column }: Props) {
       <Droppable droppableId={column.columnId}>
         {(droppableProvided) => (
           <div
+            className="min-h-8"
             ref={droppableProvided.innerRef}
             {...droppableProvided.droppableProps}
           >
