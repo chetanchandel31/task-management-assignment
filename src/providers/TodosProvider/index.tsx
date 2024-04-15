@@ -5,7 +5,6 @@ import { fetchTodos } from "../../API";
 
 type Props = { children: React.ReactNode };
 
-// TODO: use react query?
 const dedupeIntervalMs = 500;
 
 export default function TodosProvider({ children }: Props) {
@@ -23,6 +22,7 @@ export default function TodosProvider({ children }: Props) {
       todoIds: [],
     },
   });
+  const [isFetching, setIsFetching] = useState(false);
 
   const lastFetchInitiatedAtMsRef = useRef<null | number>(null);
 
@@ -34,6 +34,10 @@ export default function TodosProvider({ children }: Props) {
     }
 
     lastFetchInitiatedAtMsRef.current = Date.now();
+
+    if (lastFetchInitiatedAtMs === 0) {
+      setIsFetching(true);
+    }
 
     // fetch and set todos, columns
     try {
@@ -62,6 +66,8 @@ export default function TodosProvider({ children }: Props) {
       }));
     } catch (error) {
       console.log(error, "wyu38974389");
+    } finally {
+      setIsFetching(false);
     }
   };
 
@@ -77,6 +83,7 @@ export default function TodosProvider({ children }: Props) {
         setTodosMap,
         columns,
         setColumns,
+        isFetching,
       }}
     >
       {children}

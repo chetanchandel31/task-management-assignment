@@ -8,6 +8,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "../../../ui/components/Avatar";
+import { Badge } from "../../../ui/components/Badge";
 
 type Props = {
   todoId: string;
@@ -27,9 +28,12 @@ export default function TodoCard({ index, todoId }: Props) {
           ref={provided.innerRef}
         >
           <div
-            className={cn("border-2 rounded-md px-3 py-4 mb-4 bg-white", {
-              "opacity-50 rotate-2": snapshot.isDragging,
-            })}
+            className={cn(
+              "border-2 rounded-md px-3 py-4 mb-4 bg-white dark:bg-slate-900",
+              {
+                "opacity-50 rotate-2": snapshot.isDragging,
+              }
+            )}
           >
             <div className="flex justify-between gap-2">
               <div className="font-bold leading-tight ">
@@ -43,6 +47,10 @@ export default function TodoCard({ index, todoId }: Props) {
 
             <div className="text-muted-foreground text-xs mt-2">
               12 Jan • Created by <span className="font-bold">Kumar</span>
+            </div>
+
+            <div className="mt-2">
+              <Badge variant={"secondary"}>Design</Badge>
             </div>
 
             <div className="flex justify-between items-end mt-1">

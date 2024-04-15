@@ -7,6 +7,7 @@ type TypeTodosContext = {
   setTodosMap: TypeSetState<TypeTodosMap>;
   columns: TypeColumns;
   setColumns: TypeSetState<TypeColumns>;
+  isFetching: boolean;
 };
 
 const logWarning = () =>
@@ -28,6 +29,7 @@ export const TodosContext = createContext<TypeTodosContext>({
     },
   },
   setColumns: logWarning,
+  isFetching: false,
 });
 
 export const useTodos = () => useContext(TodosContext);

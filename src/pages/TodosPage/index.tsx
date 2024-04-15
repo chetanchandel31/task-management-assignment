@@ -6,11 +6,12 @@ import AddTodo from "./AddTodo";
 import { editTodo } from "../../API";
 import { COMPLETED_TODOS_ID, TypeColumnId } from "../../types";
 import SideNavLayout from "../../layouts/SideNavLayout";
+import { Loader2 } from "lucide-react";
 
 type Props = {};
 
 export default function TodosPage({}: Props) {
-  const { columns, setColumns } = useTodos();
+  const { columns, setColumns, isFetching } = useTodos();
 
   return (
     <SideNavLayout>
@@ -42,14 +43,20 @@ export default function TodosPage({}: Props) {
           }
         }}
       >
-        <div className="p-10 bg-slate-100 min-h-dvh">
+        <div className="p-10 bg-slate-100 dark:bg-slate-800 min-h-dvh">
           <AddTodo />
 
-          <div className="flex gap-10 mt-8">
-            <TodosColumn column={columns.incompleteTodos} />
+          {isFetching ? (
+            <div className="flex justify-center">
+              <Loader2 className="my-36 h-14 w-14 animate-spin" />
+            </div>
+          ) : (
+            <div className="flex gap-10 mt-8">
+              <TodosColumn column={columns.incompleteTodos} />
 
-            <TodosColumn column={columns.completedTodos} />
-          </div>
+              <TodosColumn column={columns.completedTodos} />
+            </div>
+          )}
         </div>
       </DragDropContext>
     </SideNavLayout>

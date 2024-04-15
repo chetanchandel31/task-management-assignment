@@ -25,10 +25,10 @@ export async function addTodo(todo: TypeTodo) {
 }
 
 export async function deleteTodo(todoId: string) {
-  if (Number(todoId) > 100) {
+  if (Number(todoId) > 150) {
     // dummy API doesn't create actual TODOs on server, i generate mock data to make it work
     // trying delete on those TODOs will fail req
-    todoId = `100`;
+    todoId = `150`;
   }
 
   const res = await fetch(`${BASE_URL}/${todoId}`, {
@@ -40,10 +40,10 @@ export async function deleteTodo(todoId: string) {
 }
 
 export async function editTodo(todoId: string, completed: boolean) {
-  if (Number(todoId) > 100) {
+  if (Number(todoId) > 150) {
     // dummy API doesn't create actual TODOs on server, i generate mock data to make it work
     // trying edit on those TODOs will fail req
-    todoId = `100`;
+    todoId = `150`;
   }
 
   const res = await fetch(`${BASE_URL}/${todoId}`, {
